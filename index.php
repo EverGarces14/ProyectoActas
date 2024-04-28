@@ -1,40 +1,39 @@
+<?php
+session_start();
+require_once 'Conexion.php';
+
+// Verificar si el usuario ya está autenticado, en ese caso redirigir a la página de inicio
+if (isset($_SESSION['Usuario'])) {
+    header("Location: Inicio.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesión</title>
     <link rel="stylesheet" href="Style.css">
-    <title>Inicio de sesion</title>
 </head>
 <body>
-    <form action="IniciarSesion.php" method="POST">
-        <h1>INICIAR SESION</h1>
-        <hr>
+    <div class="container">
+        <h1>Iniciar sesión</h1>
+        <form action="login_process.php" method="POST">
+            <label>Usuario</label>
+            <input type="text" name="Usuario" placeholder="Nombre de usuario" required><br>
+            <label>Clave</label>
+            <input type="password" name="Clave" placeholder="Clave" required><br>
+            <button type="submit">Iniciar sesión</button>
+        </form>
         <?php 
-            if (isset($_GET['error'])) {
-            ?>
-            <p class="error">
-                <?php
-                echo $_GET['error']
-                ?>
-                
-            </p>
-        <?php    
-            }
+        if (isset($_GET['error'])) {
         ?>
-
-        <hr>
-        <i class="fa-solid fa-user"></i>
-        <label>Usuario</label>
-        <input type="text" name="Usuario" placeholder="Nombre de usuario">
-
-        <i class="fa-solid fa-unlock"></i>
-        <label>Clave</label>
-        <input type="password" name="Clave" placeholder="Clave">
-        <hr>
-        <button type="submit">Iniciar Sesion</button>
-        <a href="CrearCuenta.php">Crear Cuenta</a>
-    </form>
+        <p class="error"><?php echo $_GET['error']; ?></p>
+        <?php    
+        }
+        ?>
+    </div>
 </body>
 </html>

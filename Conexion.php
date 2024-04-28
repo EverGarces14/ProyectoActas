@@ -1,12 +1,16 @@
 <?php
 
-    $host = "localhost";
-    $User = "root@localhost";
-    $pass = "";
-    $db = "iniciosesiondb";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "sistema_actas"; // Nombre de la base de datos que creaste
 
-    $conexion = mysqli_connect($host, $User , $pass, $iniciosesiondb);
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $database);
 
-    if (!$con) {
-     echo "Conexion fallida";
-    }
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+?>
